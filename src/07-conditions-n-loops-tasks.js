@@ -369,46 +369,63 @@ function getDigitalRoot(num) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(str) {
-  const temp = [];
+  const brackets = '[]{}()<>';
+  const stack = [];
   const arr = str.split('');
+
   for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === '(' || arr[i] === '{' || arr[i] === '[' || arr[i] === '<') {
-      temp.push(arr[i]);
+    const bracketsIndex = brackets.indexOf(arr[i]);
+    if (bracketsIndex % 2 === 0) {
+      stack.push(bracketsIndex + 1);
+    }
+    if (bracketsIndex % 2 !== 0) {
+      if (stack.pop() !== bracketsIndex) {
+        return false;
+      }
     }
   }
-    if (temp.length === 0) {
-      return false;
-    }
-    let char;
-    switch (arr[i]) {
-      case ')':
-        char = temp.pop();
-        if (char === '{' || char === '[' || char === '<') {
-          return false;
-        }
-        break;
-      case '}':
-        char = temp.pop();
-        if (char === '(' || char === '[' || char === '<') {
-          return false;
-        }
-        break;
-      case ']':
-        char = temp.pop();
-        if (char === '{' || char === '(' || char === '<') {
-          return false;
-        }
-        break;
-      case '>':
-        char = temp.pop();
-        if (char === '{' || char === '(' || char === '[') {
-          return false;
-        }
-        break;
-      default:
-        return true;
-    }
-  return temp.length === 0;
+  return stack.length === 0;
+
+  // const temp = [];
+  // const arr = str.split('');
+  // for (let i = 0; i < arr.length; i += 1) {
+  //   if (arr[i] === '(' || arr[i] === '{' || arr[i] === '[' || arr[i] === '<') {
+  //     temp.push(arr[i]);
+  //   }
+  //   if (temp.length === 0) {
+  //     return false;
+  //   }
+  //   let char;
+  //   switch (arr[i]) {
+  //     case ')':
+  //       char = temp.pop();
+  //       if (char === '{' || char === '[' || char === '<') {
+  //         return false;
+  //       }
+  //       break;
+  //     case '}':
+  //       char = temp.pop();
+  //       if (char === '(' || char === '[' || char === '<') {
+  //         return false;
+  //       }
+  //       break;
+  //     case ']':
+  //       char = temp.pop();
+  //       if (char === '{' || char === '(' || char === '<') {
+  //         return false;
+  //       }
+  //       break;
+  //     case '>':
+  //       char = temp.pop();
+  //       if (char === '{' || char === '(' || char === '[') {
+  //         return false;
+  //       }
+  //       break;
+  //     default:
+  //       return false;
+  //   }
+  // }
+  // return temp.length === 0;
 }
 
 
