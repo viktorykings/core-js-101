@@ -368,8 +368,47 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const temp = [];
+  const arr = str.split('');
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === '(' || arr[i] === '{' || arr[i] === '[' || arr[i] === '<') {
+      temp.push(arr[i]);
+    }
+  }
+    if (temp.length === 0) {
+      return false;
+    }
+    let char;
+    switch (arr[i]) {
+      case ')':
+        char = temp.pop();
+        if (char === '{' || char === '[' || char === '<') {
+          return false;
+        }
+        break;
+      case '}':
+        char = temp.pop();
+        if (char === '(' || char === '[' || char === '<') {
+          return false;
+        }
+        break;
+      case ']':
+        char = temp.pop();
+        if (char === '{' || char === '(' || char === '<') {
+          return false;
+        }
+        break;
+      case '>':
+        char = temp.pop();
+        if (char === '{' || char === '(' || char === '[') {
+          return false;
+        }
+        break;
+      default:
+        return true;
+    }
+  return temp.length === 0;
 }
 
 
@@ -393,8 +432,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -410,8 +449,17 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const result = [];
+  let counter = 0;
+  const array = pathes.slice().map((path) => path.split('/'));
+  array[0].forEach((path, i) => {
+    if (array.every((el) => el[i] === path && counter === i)) {
+      result.push(`${path}/`);
+      counter += 1;
+    }
+  });
+  return result.join('');
 }
 
 
