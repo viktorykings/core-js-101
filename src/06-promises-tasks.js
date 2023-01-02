@@ -29,6 +29,14 @@
  *                                                    //  Ask her again.';
  */
 function willYouMarryMe(/* isPositiveAnswer */) {
+  // const promise = new Promise(function(resolve, reject) {
+  //   resolve(isPositiveAnswer);
+  //   reject(false)
+  // })
+  // promise.then(
+  //   result => console.log('Hooray!!! She said "Yes"!');
+
+  // )
   throw new Error('Not implemented');
 }
 
